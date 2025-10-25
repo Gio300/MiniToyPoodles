@@ -61,6 +61,8 @@
         opacity: 1 !important; 
         bottom: 80px !important; 
       }
+      #puppy-video { padding: 2rem 5% !important; }
+      .video-section { max-width: 100% !important; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -199,6 +201,27 @@
       min-height: 250px;
       border-radius: 10px;
       border: 2px solid var(--warm-brown);
+      background-color: var(--poodle-gray);
+    }
+
+    /* Video Section Styles */
+    #puppy-video {
+      padding: 3rem 10%;
+      text-align: center;
+      background-color: var(--soft-cream);
+    }
+
+    .video-section {
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+
+    .video-section video {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 3px solid var(--warm-brown);
       background-color: var(--poodle-gray);
     }
 
@@ -435,6 +458,12 @@
       <img src="assets/images/IMG_20251025_140025.jpg" alt="Happy Mini Toy Poodle Puppy">
       <img src="assets/images/IMG_20251025_140029.jpg" alt="Charming Mini Toy Poodle Puppy">
       <img src="assets/images/puppy3.jpg" alt="Delightful Mini Toy Poodle Puppy">
+    </div>
+  </section>
+
+  <section id="puppy-video">
+    <h2>Watch Our Puppies in Action</h2>
+    <div class="video-section">
       <video controls poster="assets/images/hero.jpg">
         <source src="assets/images/VID_20251025_140139.mp4" type="video/mp4">
         Your browser does not support the video tag.
