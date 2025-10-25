@@ -61,8 +61,14 @@
         opacity: 1 !important; 
         bottom: 80px !important; 
       }
-      #puppy-video { padding: 2rem 5% !important; }
-      .video-section { max-width: 100% !important; }
+      #puppy-video { padding: 1rem 5% !important; }
+      .video-section { 
+        max-width: 100% !important; 
+        max-height: 50vh !important;
+      }
+      .video-section video { 
+        max-height: 50vh !important;
+      }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -206,23 +212,27 @@
 
     /* Video Section Styles */
     #puppy-video {
-      padding: 3rem 10%;
+      padding: 2rem 5%;
       text-align: center;
       background-color: var(--soft-cream);
     }
 
     .video-section {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 0 auto;
+      max-height: 60vh;
+      overflow: hidden;
     }
 
     .video-section video {
       width: 100%;
       height: auto;
+      max-height: 60vh;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       border: 3px solid var(--warm-brown);
       background-color: var(--poodle-gray);
+      object-fit: contain;
     }
 
     footer {
