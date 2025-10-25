@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MiniToyPoodles.com connects loving families with healthy, purebred Mini Toy Poodles. Home-raised, vet-checked, and full of heart." />
+  <title>Mini Toy Poodles – Purebred Companions with Heart</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <style>
+    :root {
+      --soft-cream: #fff8f0;
+      --warm-brown: #a67856;
+      --light-pink: #f5c8b0;
+      --poodle-gray: #d8d8d8;
+      --dark-choco: #5a3e2b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: var(--soft-cream);
+      color: var(--dark-choco);
+      overflow-x: hidden;
+    }
+
+    /* Device Detection and Responsive Design */
+    @media (max-width: 768px) {
+      .logo { height: 40px !important; }
+      header { font-size: 1.4rem !important; padding: 1rem !important; }
+      .contact-info { font-size: 1rem !important; }
+      .hero-banner { flex-direction: column !important; gap: 2rem !important; }
+      .hero-dogs { justify-content: center !important; }
+      .hero-dog-left, .hero-dog-right { width: 150px !important; height: 150px !important; }
+      .hero-text { text-align: center !important; }
+      .hero-text h1 { font-size: 1.8rem !important; }
+      .hero-text p { font-size: 1rem !important; }
+      .hero { padding: 2rem 1rem !important; }
+      .gallery { grid-template-columns: 1fr !important; }
+      section { padding: 2rem 5% !important; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .logo { height: 50px !important; }
+      header { font-size: 1.6rem !important; }
+      .gallery { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    @media (min-width: 1025px) {
+      .logo { height: 70px !important; }
+      header { font-size: 2rem !important; }
+      .gallery { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+
+    header {
+      background-color: var(--light-pink);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--dark-choco);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo {
+      height: 80px;
+      width: auto;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .contact-info {
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-top: 0.5rem;
+    }
+
+    section {
+      padding: 3rem 10%;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--warm-brown);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--dark-choco);
+      margin-bottom: 2rem;
+    }
+
+    .hero {
+      background-color: var(--soft-cream);
+      padding: 2rem;
+    }
+
+    .hero-banner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-dogs {
+      display: flex;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .hero-dog-left,
+    .hero-dog-right {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-dog-left:hover,
+    .hero-dog-right:hover {
+      transform: scale(1.05);
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: left;
+      color: var(--dark-choco);
+    }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+      color: var(--warm-brown);
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--dark-choco);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img, .gallery video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--warm-brown);
+      background-color: var(--poodle-gray);
+    }
+
+    footer {
+      background-color: var(--light-pink);
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--dark-choco);
+      font-size: 0.9rem;
+    }
+
+    /* PiP Video Modal */
+    .pip-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-in;
+      overflow: hidden;
+    }
+
+    .video-container {
+      position: relative;
+      width: 90vw;
+      height: 90vh;
+      max-width: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: scaleIn 0.5s ease-out;
+    }
+
+    .pip-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(1.1) contrast(1.1) saturate(1.2);
+    }
+
+    .video-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-container:hover .video-controls {
+      opacity: 1;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .control-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: scale(1.1);
+    }
+
+    .pip-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Banner Styles */
+    .banner {
+      background: linear-gradient(135deg, var(--warm-brown), var(--light-pink));
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 0;
+    }
+
+    .banner h1 {
+      font-size: 3rem;
+      margin: 0 0 1rem 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .banner p {
+      font-size: 1.3rem;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Gallery Image Fixes */
+    .gallery img {
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .gallery img:nth-child(2) {
+      object-position: 60% center; /* Bring the left dog into frame */
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="assets/images/logo.png" alt="MiniToyPoodles Logo" class="logo">
+    MiniToyPoodles.com
+    <div class="contact-info">
+      Call or Text: <strong>(623) 562-2445</strong> (Maricopa, AZ)
+    </div>
+  </header>
+
+  <!-- PiP Video Modal -->
+  <div id="pipModal" class="pip-modal">
+    <div class="pip-close" onclick="closePiP()">×</div>
+    <div class="video-container">
+      <video id="pipVideo" class="pip-video" autoplay muted loop>
+        <source src="assets/images/VID_20251025_140145.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-controls">
+        <button class="control-btn restart-btn" onclick="restartVideo()">⏮</button>
+        <button class="control-btn pause-btn" onclick="togglePause()">⏸</button>
+        <button class="control-btn play-btn" onclick="togglePause()" style="display: none;">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <h1>Mini Toy Poodles</h1>
+  </section>
+
+  <section class="hero">
+    <div class="hero-banner">
+      <div class="hero-dogs">
+        <img src="assets/images/hero.jpg" alt="Adorable Mini Toy Poodle Puppy" class="hero-dog-left">
+        <img src="assets/images/IMG_20251025_140010.jpg" alt="Playful Mini Toy Poodle Puppy" class="hero-dog-right">
+      </div>
+      <div class="hero-text">
+        <h1>Purebred Companions with Heart</h1>
+        <p>Home-raised, vet-checked, and ready to bring joy and love to your family</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Mini Toy Poodles</h2>
+    <p>Mini Toy Poodles are known for their intelligence, playful spirit, and hypoallergenic coats. Each puppy here is raised with care, socialized early, and nurtured in a loving home environment.</p>
+    
+    <div style="background-color: var(--poodle-gray); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+      <h3 style="color: var(--warm-brown); margin-bottom: 1rem;">Our Puppies Include:</h3>
+      <ul style="text-align: left; display: inline-block; color: var(--dark-choco);">
+        <li><strong>Certified Registration Pedigree</strong> - Full AKC registration papers</li>
+        <li><strong>Microchipped</strong> - For permanent identification and safety</li>
+        <li><strong>Vet Checked</strong> - Health examination and vaccinations</li>
+        <li><strong>Home Raised</strong> - Socialized in a loving family environment</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Meet Our Puppies</h2>
+    <div class="gallery">
+      <img src="assets/images/hero.jpg" alt="Adorable Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140010.jpg" alt="Playful Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140014.jpg" alt="Sweet Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140018.jpg" alt="Cute Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140022.jpg" alt="Loving Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140025.jpg" alt="Happy Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140029.jpg" alt="Charming Mini Toy Poodle Puppy">
+      <img src="assets/images/puppy3.jpg" alt="Delightful Mini Toy Poodle Puppy">
+      <video controls poster="assets/images/hero.jpg">
+        <source src="assets/images/VID_20251025_140145.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="care">
+    <h2>Poodle Care & Love</h2>
+    <p>Learn about grooming, feeding, and daily playtime routines that keep Mini Toy Poodles healthy and happy. Our easy-to-follow guides help new owners prepare before adoption.</p>
+  </section>
+
+  <section id="adoption">
+    <h2>Adoption Inquiry</h2>
+    <p>To learn more about upcoming litters or to apply for adoption, please call or text us at <strong>(623) 562-2445</strong> (located in Maricopa, AZ). Every puppy deserves a caring, lifelong home.</p>
+  </section>
+
+  <footer>
+    MiniToyPoodles.com © 2025 – All rights reserved.<br>
+    Call or Text: <strong>(623) 562-2445</strong> (Maricopa, AZ)
+  </footer>
+
+  <script>
+    let videoPlaying = true;
+
+    // Show PiP video on page load
+    window.addEventListener('load', function() {
+      console.log('Page loaded, showing video...');
+      setTimeout(function() {
+        const modal = document.getElementById('pipModal');
+        const video = document.getElementById('pipVideo');
+        
+        console.log('Modal element:', modal);
+        console.log('Video element:', video);
+        
+        if (modal && video) {
+          modal.style.display = 'flex';
+          video.play().then(() => {
+            console.log('Video started playing');
+          }).catch((error) => {
+            console.error('Error playing video:', error);
+          });
+        } else {
+          console.error('Modal or video element not found');
+        }
+      }, 1000); // Show after 1 second
+    });
+
+    // Close PiP video
+    function closePiP() {
+      document.getElementById('pipModal').style.display = 'none';
+      const video = document.getElementById('pipVideo');
+      video.pause();
+    }
+
+    // Restart video
+    function restartVideo() {
+      const video = document.getElementById('pipVideo');
+      video.currentTime = 0;
+      video.play();
+      videoPlaying = true;
+      updatePlayPauseButtons();
+    }
+
+    // Toggle pause/play
+    function togglePause() {
+      const video = document.getElementById('pipVideo');
+      if (videoPlaying) {
+        video.pause();
+        videoPlaying = false;
+      } else {
+        video.play();
+        videoPlaying = true;
+      }
+      updatePlayPauseButtons();
+    }
+
+    // Update play/pause button visibility
+    function updatePlayPauseButtons() {
+      const pauseBtn = document.querySelector('.pause-btn');
+      const playBtn = document.querySelector('.play-btn');
+      
+      if (videoPlaying) {
+        pauseBtn.style.display = 'flex';
+        playBtn.style.display = 'none';
+      } else {
+        pauseBtn.style.display = 'none';
+        playBtn.style.display = 'flex';
+      }
+    }
+
+    // Close PiP video when clicking outside
+    document.getElementById('pipModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePiP();
+      }
+    });
+
+    // Device detection and optimization
+    function detectDevice() {
+      const userAgent = navigator.userAgent;
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const isTablet = /iPad|Android/i.test(userAgent) && window.innerWidth >= 768;
+      
+      if (isMobile && !isTablet) {
+        document.body.classList.add('mobile');
+        // Adjust video for mobile
+        const videoContainer = document.querySelector('.video-container');
+        if (videoContainer) {
+          videoContainer.style.width = '95vw';
+          videoContainer.style.height = '95vh';
+        }
+      } else if (isTablet) {
+        document.body.classList.add('tablet');
+      } else {
+        document.body.classList.add('desktop');
+      }
+    }
+
+    // Run device detection
+    detectDevice();
+
+    // Add smooth scrolling for better UX
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
