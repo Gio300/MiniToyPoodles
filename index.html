@@ -43,6 +43,24 @@
       .hero { padding: 2rem 1rem !important; }
       .gallery { grid-template-columns: 1fr !important; }
       section { padding: 2rem 5% !important; }
+      
+      /* Mobile video optimizations */
+      .pip-close { 
+        top: 10px !important; 
+        right: 10px !important; 
+        width: 50px !important; 
+        height: 50px !important; 
+        font-size: 1.5rem !important; 
+      }
+      .mobile-close { display: block !important; }
+      .video-container { 
+        width: 95vw !important; 
+        height: 95vh !important; 
+      }
+      .video-controls { 
+        opacity: 1 !important; 
+        bottom: 80px !important; 
+      }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -197,6 +215,7 @@
       z-index: 1000;
       animation: fadeIn 0.5s ease-in;
       overflow: hidden;
+      touch-action: manipulation;
     }
 
     .video-container {
@@ -260,13 +279,38 @@
       color: white;
       font-size: 2rem;
       cursor: pointer;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1001;
+      border: 2px solid white;
+      transition: all 0.3s ease;
+    }
+
+    .pip-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Mobile-specific close button */
+    .mobile-close {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: 2px solid white;
+      z-index: 1001;
+      display: none;
     }
 
     @keyframes fadeIn {
@@ -324,6 +368,7 @@
   <!-- PiP Video Modal -->
   <div id="pipModal" class="pip-modal">
     <div class="pip-close" onclick="closePiP()">×</div>
+    <div class="mobile-close" onclick="closePiP()">Tap to Close Video</div>
     <div class="video-container">
       <video id="pipVideo" class="pip-video" autoplay muted loop>
         <source src="assets/images/VID_20251025_140145.mp4" type="video/mp4">
@@ -477,6 +522,42 @@
       if (e.target === this) {
         closePiP();
       }
+    });
+
+    // Mobile touch support for closing video
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.getElementById('pipModal').addEventListener('touchstart', function(e) {
+      touchStartY = e.changedTouches[0].screenY;
+    });
+
+    document.getElementById('pipModal').addEventListener('touchend', function(e) {
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const swipeDistance = touchStartY - touchEndY;
+      
+      // Swipe up to close (common mobile gesture)
+      if (swipeDistance > swipeThreshold) {
+        closePiP();
+      }
+    }
+
+    // Double tap to close (mobile-friendly)
+    let lastTap = 0;
+    document.getElementById('pipModal').addEventListener('touchend', function(e) {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      
+      if (tapLength < 500 && tapLength > 0) {
+        // Double tap detected
+        closePiP();
+      }
+      lastTap = currentTime;
     });
 
     // Device detection and optimization
