@@ -269,6 +269,10 @@
       overflow: hidden;
     }
 
+    .video-player-container {
+      position: relative;
+    }
+
     .video-section video {
       width: 100%;
       height: auto;
@@ -278,6 +282,35 @@
       border: 3px solid var(--warm-brown);
       background-color: var(--poodle-gray);
       object-fit: contain;
+    }
+
+    .video-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 1rem;
+    }
+
+    .nav-btn {
+      background: var(--warm-brown);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-btn:hover {
+      background: var(--dark-choco);
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
     footer {
@@ -494,7 +527,7 @@
     <div style="background-color: var(--poodle-gray); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
       <h3 style="color: var(--warm-brown); margin-bottom: 1rem;">Our Puppies Include:</h3>
       <ul style="text-align: left; display: inline-block; color: var(--dark-choco);">
-        <li><strong>Certified Registration Pedigree</strong> - Full AKC registration papers</li>
+        <li><strong>2 Certified Registrations</strong> - Full certification papers</li>
         <li><strong>Microchipped</strong> - For permanent identification and safety</li>
         <li><strong>Vet Checked</strong> - Health examination and vaccinations</li>
         <li><strong>Home Raised</strong> - Socialized in a loving family environment</li>
@@ -505,25 +538,30 @@
   <section id="gallery">
     <h2>Meet Our Puppies</h2>
     <div class="gallery">
-      <img src="assets/images/hero.jpg" alt="Adorable Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140010.jpg" alt="Playful Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140014.jpg" alt="Sweet Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140018.jpg" alt="Cute Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140022.jpg" alt="Loving Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140025.jpg" alt="Happy Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140029.jpg" alt="Charming Mini Toy Poodle Puppy">
-      <img src="assets/images/puppy3.jpg" alt="Delightful Mini Toy Poodle Puppy">
-      <img src="assets/images/IMG_20251025_140037.jpg" alt="Beautiful Mini Toy Poodle Puppy">
+      <img src="assets/images/1761458797326.jpg" alt="Adorable Mini Toy Poodle Puppy">
+      <img src="assets/images/1761458869044.jpg" alt="Playful Mini Toy Poodle Puppy">
+      <img src="assets/images/1761458944332.jpg" alt="Sweet Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_230333.jpg" alt="Cute Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_230338.jpg" alt="Loving Mini Toy Poodle Puppy">
+      <img src="assets/images/IMG_20251025_140029.jpg" alt="Happy Mini Toy Poodle Puppy">
     </div>
   </section>
 
   <section id="puppy-video">
-    <h2>Watch Our Puppies in Action</h2>
+    <h2>Meet Our Pups</h2>
     <div class="video-section">
-      <video controls poster="assets/images/hero.jpg">
-        <source src="assets/images/VID_20251025_140139.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="video-player-container">
+        <video id="mainVideo" controls poster="assets/images/hero.jpg">
+          <source src="assets/images/VID_20251026_170117.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-navigation">
+          <button class="nav-btn" onclick="previousVideo()">◀</button>
+          <button class="nav-btn" onclick="toggleMainVideo()">⏸</button>
+          <button class="nav-btn" onclick="replayVideo()">⏮</button>
+          <button class="nav-btn" onclick="nextVideo()">▶</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -652,6 +690,51 @@
         closePiP();
       }
       lastTap = currentTime;
+    });
+
+    // Main video navigation
+    let currentVideoIndex = 0;
+    const videos = [
+      'VID_20251026_170117.mp4',
+      'VID_20251025_140139.mp4'
+    ];
+
+    function loadVideo(index) {
+      const video = document.getElementById('mainVideo');
+      if (video && videos[index]) {
+        video.src = 'assets/images/' + videos[index];
+        video.load();
+      }
+    }
+
+    function toggleMainVideo() {
+      const video = document.getElementById('mainVideo');
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
+    function replayVideo() {
+      const video = document.getElementById('mainVideo');
+      video.currentTime = 0;
+      video.play();
+    }
+
+    function nextVideo() {
+      currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+      loadVideo(currentVideoIndex);
+    }
+
+    function previousVideo() {
+      currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+      loadVideo(currentVideoIndex);
+    }
+
+    // Initialize with first video
+    window.addEventListener('load', function() {
+      loadVideo(0);
     });
 
     // Device detection and optimization
