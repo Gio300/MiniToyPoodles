@@ -80,7 +80,7 @@
       .banner h1 { font-size: 1.8rem !important; }
       .hero-banner { flex-direction: column !important; gap: 2rem !important; }
       .hero-dogs { justify-content: center !important; }
-      .hero-dog-left, .hero-dog-right { width: 150px !important; height: 150px !important; }
+      .hero-dog-single { width: 200px !important; height: 200px !important; }
       .hero-text { text-align: center !important; }
       .hero-text h1 { font-size: 1.8rem !important; }
       .hero-text p { font-size: 1rem !important; }
@@ -194,20 +194,19 @@
       display: flex;
       gap: 1rem;
       flex: 1;
+      justify-content: center;
     }
 
-    .hero-dog-left,
-    .hero-dog-right {
-      width: 200px;
-      height: 200px;
+    .hero-dog-single {
+      width: 300px;
+      height: 300px;
       object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
     }
 
-    .hero-dog-left:hover,
-    .hero-dog-right:hover {
+    .hero-dog-single:hover {
       transform: scale(1.05);
     }
 
@@ -491,7 +490,7 @@
     <div class="mobile-close" onclick="closePiP()">Tap to Close Video</div>
     <div class="video-container">
       <video id="pipVideo" class="pip-video" autoplay muted loop>
-        <source src="assets/images/VID_20251025_140145.mp4" type="video/mp4">
+        <source src="assets/images/VID_20251026_170117.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <div class="video-controls">
@@ -510,8 +509,7 @@
   <section class="hero">
     <div class="hero-banner">
       <div class="hero-dogs">
-        <img src="assets/images/hero.jpg" alt="Adorable Mini Toy Poodle Puppy" class="hero-dog-left">
-        <img src="assets/images/IMG_20251025_140010.jpg" alt="Playful Mini Toy Poodle Puppy" class="hero-dog-right">
+        <img src="assets/images/1761458869044.jpg" alt="Adorable Mini Toy Poodle Puppy" class="hero-dog-single">
       </div>
       <div class="hero-text">
         <h1>Purebred Companions with Heart</h1>
@@ -548,10 +546,10 @@
   </section>
 
   <section id="puppy-video">
-    <h2>Meet Our Pups</h2>
+    <h2>Pick Your Pups</h2>
     <div class="video-section">
       <div class="video-player-container">
-        <video id="mainVideo" controls poster="assets/images/hero.jpg">
+        <video id="mainVideo" controls poster="assets/images/1761458869044.jpg">
           <source src="assets/images/VID_20251026_170117.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
